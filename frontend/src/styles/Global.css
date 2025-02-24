@@ -1,0 +1,10 @@
+body {
+    background-color: #111; /* Тёмный фон */
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Фиксируем на весь экран */
+    overflow: hidden; /* Убираем прокрутку */
+  }
+  

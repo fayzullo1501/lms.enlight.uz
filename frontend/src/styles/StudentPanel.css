@@ -1,0 +1,27 @@
+.student-panel {
+    padding: 20px;
+    color: white;
+  }
+  
+  .student-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .student-btn {
+    display: inline-block;
+    padding: 12px;
+    background: #ffc107;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  .student-btn:hover {
+    background: #e0a800;
+  }
+  

@@ -1,0 +1,93 @@
+:root {
+    --sidebar-width: 220px; /* Ширина Sidebar */
+    --header-height: 80px;  /* Высота Header */
+    --content-width: 90%; /* Ширина контента */
+    --table-width: 85%; /* Оптимальная ширина таблицы */
+}
+
+/* Основной контейнер контента */
+.admin-content {
+    padding: 0px 20px 20px 20px; /* Убрали верхний отступ */
+    margin-left: var(--sidebar-width); /* Отступ слева, чтобы контент не заходил на sidebar */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем контент */
+}
+
+/* Обертка для контента */
+.content-wrapper {
+    width: var(--table-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Кнопка "Добавить" */
+.add-btn {
+    background-color: #2d64f1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Отступ между кнопкой и таблицей */
+    align-self: flex-start; /* Выравниваем кнопку влево */
+}
+
+.add-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Контейнер для таблицы */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Горизонтальная прокрутка при необходимости */
+}
+
+/* Таблица пользователей */
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 1000px; /* Минимальная ширина */
+}
+
+/* Заголовки и ячейки таблицы */
+.users-table th,
+.users-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+}
+
+/* Заголовки таблицы */
+.users-table th {
+    background-color: #333;
+    color: white;
+}
+
+/* Текст в ячейках */
+.users-table td {
+    color: white;
+}
+
+/* Фото пользователей */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Фиксированный заголовок таблицы */
+.users-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    z-index: 2;
+}

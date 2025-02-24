@@ -1,0 +1,145 @@
+/* Глобальные стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arsenal', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-color: #111;
+}
+
+/* 🔹 Контейнер логина */
+.login-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 🔹 Левая часть (фон с изображением) */
+.left-side {
+  width: 70%;
+  height: 100%;
+  background: url("../assets/loginbg.png") no-repeat center;
+  background-size: cover;
+  position: relative;
+}
+
+/* 🔹 Кнопка "Вернуться на сайт" */
+.back-to-site {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.back-to-site:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Правая часть (форма) */
+.right-side {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #111;
+}
+
+/* 🔹 Блок формы */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* 🔹 Заголовок */
+.form-container h2 {
+  font-size: 30px;
+  text-align: left;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Поля ввода */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  font-size: 24px;
+}
+
+/* 🔹 Кнопка "Войти" */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: gray;
+}
+
+/* 🔹 Ссылка "Забыли пароль?" */
+.forgot-password {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.forgot-password a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Медиа-запрос для мобильных */
+@media (max-width: 768px) {
+  .login-container {
+      flex-direction: column;
+  }
+
+  .left-side {
+      width: 100%;
+      height: 40vh;
+  }
+
+  .right-side {
+      width: 100%;
+  }
+}
