@@ -1,15 +1,15 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import cors from "cors";
-import path from "path";
-import fs from "fs";
-import morgan from "morgan"; // ✅ Логирование запросов
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const morgan = require("morgan");
 
-import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import courseRoutes from "./routes/courseRoutes.js";
-import chatRoutes from "./routes/chatRoutes.js";
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 dotenv.config();
 
@@ -18,37 +18,34 @@ const PORT = process.env.PORT || 5001;
 
 // 📌 Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // ✅ Парсинг form-data
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// 📌 Проверяем, установлен ли `morgan`
 if (fs.existsSync("./node_modules/morgan")) {
-  app.use(morgan("dev")); // ✅ Логируем все входящие запросы
+  app.use(morgan("dev"));
 }
 
-// 📌 Раздача статических файлов
+// 📌 Статика для загрузки фото
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
-
-// 📌 API Маршруты
+// 📌 API маршруты
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/chat", chatRoutes);
 
-// 📌 Подключение к MongoDB
+// 📌 MongoDB
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// 📌 Глобальная обработка ошибок
+// 📌 Глобальная ошибка
 app.use((err, req, res, next) => {
   console.error("❌ Global Error Handler:", err);
   res.status(500).json({ message: "❌ Внутренняя ошибка сервера" });
 });
 
-// 📌 Запуск сервера
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });

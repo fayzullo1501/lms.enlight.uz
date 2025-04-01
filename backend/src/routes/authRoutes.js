@@ -1,8 +1,8 @@
-import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -14,11 +14,11 @@ const User = mongoose.model("User", new mongoose.Schema({
   phone: String,
   login: { type: String, unique: true },
   email: { type: String, unique: true },
-  password: String, // 🔥 Оставляем строку, но при сохранении хешируем
+  password: String,
   passport: { series: String, number: String }
 }));
 
-// 🔥 Регистрация нового пользователя с хешированием пароля
+// 🔐 Регистрация нового пользователя
 router.post("/register", async (req, res) => {
   const { login, password, fullName, role, phone, email, passportSeries, passportNumber } = req.body;
 
@@ -43,7 +43,6 @@ router.post("/register", async (req, res) => {
 
     await newUser.save();
 
-    // ✅ Отправляем паспортные данные и дату регистрации
     res.status(201).json({ 
       message: "Пользователь зарегистрирован", 
       user: {
@@ -62,29 +61,28 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
-// 🔥 Авторизация пользователя
+// 🔐 Авторизация пользователя
 router.post("/login", async (req, res) => {
   const { login, password } = req.body;
-  console.log("Получен логин:", login);
 
   try {
     const user = await User.findOne({ $or: [{ login }, { email: login }] });
-    console.log("Найден пользователь:", user);
 
     if (!user) {
-      console.log("Пользователь не найден!");
       return res.status(401).json({ message: "Неверный логин или пароль" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Результат проверки пароля:", isMatch);
 
     if (!isMatch) {
       return res.status(401).json({ message: "Неверный логин или пароль" });
     }
 
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
     res.json({ token, user });
   } catch (error) {
@@ -93,4 +91,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
