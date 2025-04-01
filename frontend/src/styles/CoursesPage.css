@@ -1,0 +1,109 @@
+/* Контейнер для таблицы */
+.courses-table-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: transparent;
+    border-bottom: none;
+    flex: 1;
+    padding-bottom: 10px;
+}
+
+/* Таблица курсов */
+.courses-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Заголовки и ячейки */
+.courses-table th, .courses-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    vertical-align: middle;
+    color: white;
+}
+
+/* Заголовки */
+.courses-table th {
+    background-color: #333;
+    font-weight: bold;
+    color: white;
+    border-bottom: 2px solid #444;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Эффект наведения */
+.courses-table tbody tr:hover {
+    background-color: #292929;
+}
+
+/* Картинка баннера */
+.courses-banner {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Панель действий */
+.courses-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.courses-add-btn {
+    background: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.courses-add-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.courses-edit-btn {
+    background: #0e0e0e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.courses-edit-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* ✅ Исправлена кнопка удаления, теперь она белая */
+.courses-delete-btn {
+    background: #0e0e0e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.courses-delete-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* Выравнивание количества студентов */
+.courses-table td:nth-child(9), 
+.courses-table th:nth-child(9) {
+    text-align: center;
+}

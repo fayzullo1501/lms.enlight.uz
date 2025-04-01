@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import StudentSidebar from "./StudentSidebar";
+import StudentHeader from "./StudentHeader";
+import "../styles/StudentPanel.css";
 
-const StudentPanel = () => {
+const StudentPanel = ({ children }) => {
   return (
-    <div className="student-panel">
-      <h1>Панель студента</h1>
-      <p>Здесь вы можете просматривать свои курсы и материалы.</p>
-
-      <div className="student-actions">
-        <Link to="/student/courses" className="student-btn">📖 Мои курсы</Link>
-        <Link to="/student/materials" className="student-btn">📂 Учебные материалы</Link>
+    <div className="student-layout">
+      <StudentSidebar />
+      <div className="student-main">
+        <StudentHeader />
+        <div className="student-container">{children}</div> {/* Основной контент */}
       </div>
     </div>
   );

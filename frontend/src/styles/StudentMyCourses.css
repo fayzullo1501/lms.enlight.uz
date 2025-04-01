@@ -1,0 +1,101 @@
+/* ✅ Основной контейнер */
+.student-panel .my-courses-container {
+    padding: 20px;
+  }
+  
+  /* ✅ Сетка карточек курсов */
+  .student-panel .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  
+  /* ✅ Карточка курса */
+  .student-panel .course-card {
+    background: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .student-panel .course-card:hover {
+    transform: scale(1.03);
+  }
+  
+  /* ✅ Баннер курса */
+  .student-panel .course-banner {
+    width: calc(100% - 20px);
+    height: 180px;
+    margin: 10px auto 0;
+    border-radius: 10px 10px 0 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px;
+    color: white;
+  }
+  
+  /* ✅ Дата курса */
+  .student-panel .course-date {
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  /* ✅ Контент под баннером */
+  .student-panel .course-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* ✅ Название курса */
+  .student-panel .course-details h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  /* ✅ Формат курса и кнопка входа */
+  .student-panel .course-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* ✅ Кнопка входа */
+  .student-panel .enter-course-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    width: 80px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .student-panel .enter-course-btn:hover {
+    background: #0056b3;
+  }
+  
+  /* ✅ Иконка внутри кнопки */
+  .student-panel .enter-course-btn svg {
+    font-size: 18px;
+  }
+  

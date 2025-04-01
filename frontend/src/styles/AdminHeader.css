@@ -1,92 +1,64 @@
-/* Хедер */
 .admin-header {
+  width: 100%;
+  height: 60px;
+  background-color: #0e0e0e;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background-color: #111;
-  color: white;
-  border-bottom: 1px solid #222;
-  position: fixed;
-  top: 0;
-  left: var(--sidebar-width, 220px); /* Динамическая ширина Sidebar */
-  width: calc(100% - var(--sidebar-width, 220px));
-  height: 80px;
-  z-index: 100;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #333;
 }
 
-/* Название раздела */
 .page-title {
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-/* Правая часть хедера */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
-/* Поисковая строка */
 .search-box {
   display: flex;
   align-items: center;
   background: #222;
-  padding: 10px 12px;
-  border-radius: 8px;
-  transition: 0.2s;
+  padding: 12px 12px;
+  border-radius: 6px;
+}
+
+.search-icon {
+  color: #b0b0b0;
 }
 
 .search-box input {
   background: none;
   border: none;
   outline: none;
-  color: white;
-  margin-left: 10px;
-  font-size: 14px;
+  color: #fff;
+  margin-left: 8px;
 }
 
-.search-box .search-icon {
-  color: gray;
-  font-size: 16px;
-}
-
-.search-box:hover {
-  background: #333;
-}
-
-/* Иконка уведомлений */
 .notification-icon {
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.notification-icon:hover {
-  color: #ddd;
-}
-
-/* Профиль пользователя */
 .user-profile {
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
-}
-
-.user-name {
-  font-size: 18px;
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  transition: 0.2s;
 }
 
-.user-avatar:hover {
-  transform: scale(1.1);
+.user-name {
+  font-size: 20px;
+  color: #fff;
 }

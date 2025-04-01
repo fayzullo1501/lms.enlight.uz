@@ -1,0 +1,122 @@
+/* ✅ Стили уникальные для teacher-panel */
+.teacher-panel .my-courses-container {
+  padding: 20px;
+}
+
+.teacher-panel .courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* ✅ Карточка курса */
+.teacher-panel .course-card {
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 100%;
+}
+
+.teacher-panel .course-card:hover {
+  transform: scale(1.03);
+}
+
+/* ✅ Баннер - только для teacher-panel */
+.teacher-panel .course-banner {
+  width: calc(100% - 20px);
+  height: 180px;
+  margin: 10px auto 0;
+  border-radius: 10px 10px 0 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  color: white;
+}
+
+/* ✅ Дата курса */
+.teacher-panel .course-date {
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 8px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* ✅ Новая стилизация звездочки */
+.teacher-panel .pin-icon {
+  font-size: 32px;
+  border: 2px  solid #007bff;
+  border-radius: 15%;
+  padding: 5px;
+  transition: all 0.3s ease;
+  color: #007bff;
+  background: none;
+}
+
+.teacher-panel .pin-icon:hover {
+  background: #007bff;
+  color: white;
+}
+
+.teacher-panel .pin-icon.pinned {
+  background: #007bff;
+  color: white;
+}
+
+/* ✅ Контент под баннером */
+.teacher-panel .course-details {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ✅ Название курса */
+.teacher-panel .course-details h3 {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* ✅ Формат и кнопка входа теперь в одной строке */
+.teacher-panel .course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ✅ Кнопка входа */
+.teacher-panel .enter-course-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ✅ Размещаем текст и иконку */
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  width: 80px; /* ✅ Увеличили ширину для текста */
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 14px; /* ✅ Размер шрифта */
+  font-weight: 500;
+}
+
+.teacher-panel .enter-course-btn:hover {
+  background: #0056b3;
+}
+
+/* ✅ Иконка внутри кнопки */
+.teacher-panel .enter-course-btn svg {
+  font-size: 18px;
+}
+
+

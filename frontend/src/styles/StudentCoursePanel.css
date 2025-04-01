@@ -1,0 +1,32 @@
+.student-course-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0e0e0e;
+    color: #fff;
+    overflow: hidden;
+  }
+  
+  .student-course-sidebar {
+    width: 250px;
+    background-color: #000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .student-course-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .student-course-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #0e0e0e;
+    overflow-y: auto;
+  }
+  

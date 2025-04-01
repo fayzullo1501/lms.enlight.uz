@@ -1,49 +1,11 @@
-:root {
-    --sidebar-width: 220px; /* Ширина Sidebar */
-    --header-height: 80px;  /* Высота Header */
-    --content-width: 90%; /* Ширина контента */
-    --table-width: 85%; /* Оптимальная ширина таблицы */
-}
-
-/* Основной контейнер контента */
-.admin-content {
-    padding: 0px 20px 20px 20px; /* Убрали верхний отступ */
-    margin-left: var(--sidebar-width); /* Отступ слева, чтобы контент не заходил на sidebar */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрируем контент */
-}
-
-/* Обертка для контента */
-.content-wrapper {
-    width: var(--table-width);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-/* Кнопка "Добавить" */
-.add-btn {
-    background-color: #2d64f1;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px; /* Отступ между кнопкой и таблицей */
-    align-self: flex-start; /* Выравниваем кнопку влево */
-}
-
-.add-btn:hover {
-    background-color: #1d4ed8;
-}
-
-/* Контейнер для таблицы */
-.table-container {
-    width: 100%;
-    overflow-x: auto; /* Горизонтальная прокрутка при необходимости */
+/* Контейнер для таблицы пользователей */
+.users-table-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: transparent;
+    border-bottom: none;
+    flex: 1;
+    padding-bottom: 10px;
 }
 
 /* Таблица пользователей */
@@ -53,41 +15,95 @@
     background-color: #222;
     border-radius: 8px;
     overflow: hidden;
-    min-width: 1000px; /* Минимальная ширина */
 }
 
-/* Заголовки и ячейки таблицы */
-.users-table th,
-.users-table td {
-    padding: 12px;
+/* Заголовки и ячейки */
+.users-table th, .users-table td {
+    padding: 15px;
     text-align: left;
     border-bottom: 1px solid #333;
-    white-space: nowrap;
+    vertical-align: middle;
+    color: white;
 }
 
-/* Заголовки таблицы */
+/* Заголовки */
 .users-table th {
     background-color: #333;
+    font-weight: bold;
     color: white;
+    border-bottom: 2px solid #444;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
-/* Текст в ячейках */
-.users-table td {
-    color: white;
+/* Эффект наведения */
+.users-table tbody tr:hover {
+    background-color: #292929;
 }
 
 /* Фото пользователей */
-.user-avatar {
+.users-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-/* Фиксированный заголовок таблицы */
-.users-table thead th {
-    position: sticky;
-    top: 0;
-    background-color: #333;
-    z-index: 2;
+/* Панель действий */
+.users-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.users-add-btn {
+    background: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.users-add-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.users-edit-btn {
+    background: #0e0e0e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.users-edit-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* ✅ Исправлена кнопка удаления, теперь она белая */
+.users-delete-btn {
+    background: #0e0e0e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.users-delete-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* Выравнивание колонок */
+.users-table td:nth-child(9), 
+.users-table th:nth-child(9) {
+    text-align: center;
 }

@@ -6,7 +6,6 @@ import "../styles/LoginPage.css";
 const LoginPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -14,11 +13,11 @@ const LoginPage = () => {
     try {
       const { data } = await axios.post("http://localhost:5001/api/auth/login", { login, password });
 
-      console.log("✅ Ответ сервера при логине:", data); // Лог для проверки
+      console.log("✅ Ответ сервера при логине:", data);
 
       // ✅ Проверяем, есть ли ID пользователя в ответе
       if (!data.user || !data.user._id) {
-        setError("Ошибка авторизации: отсутствует ID пользователя.");
+        alert("Ошибка авторизации: отсутствует ID пользователя.");
         return;
       }
 
@@ -27,12 +26,13 @@ const LoginPage = () => {
       localStorage.setItem("role", data.user.role);
       localStorage.setItem("userId", data.user._id);
 
+      // ✅ Перенаправляем без alert
       navigate("/dashboard");
     } catch (err) {
       if (err.response?.status === 401) {
-        setError("Неверный логин или пароль");
+        alert("Неверный логин или пароль!");
       } else {
-        setError("Ошибка сервера. Попробуйте позже.");
+        alert("Ошибка сервера. Попробуйте позже.");
       }
     }
   };
@@ -50,7 +50,6 @@ const LoginPage = () => {
       <div className="right-side">
         <div className="form-container">
           <h2>Вход в систему</h2>
-          {error && <p className="error">{error}</p>}
           <form onSubmit={handleLogin}>
             <div className="input-group">
               <label>Логин</label>

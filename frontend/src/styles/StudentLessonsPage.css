@@ -1,0 +1,47 @@
+.lessons-container {
+    padding: 20px;
+  }
+  
+  .lesson-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lesson-item {
+    display: flex;
+    align-items: center;
+    background: #1c1c1c;
+    padding: 15px;
+    border-radius: 6px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .lesson-item:hover {
+    background: #292929;
+  }
+  
+  .lesson-banner {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+  
+  .lesson-info {
+    flex: 1;
+  }
+  
+  .lesson-info h3 {
+    margin: 0 0 5px;
+    color: white;
+  }
+  
+  .lesson-info p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #bbb;
+  }
+  

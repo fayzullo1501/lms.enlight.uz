@@ -10,18 +10,11 @@ const AdminHeader = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const userId = localStorage.getItem("userId"); // ✅ Получаем ID
-      if (!userId) {
-        console.warn("❌ userId не найден в localStorage");
-        return;
-      }
+      const userId = localStorage.getItem("userId");
+      if (!userId) return;
 
       try {
-        console.log("🔍 Запрашиваем пользователя:", userId); // Проверка
-
-        const { data } = await axios.get(`http://localhost:5001/api/users/profile/${userId}`);
-        console.log("✅ Данные пользователя получены:", data); // Проверка
-
+        const { data } = await axios.get(`http://localhost:5001/api/users/${userId}`);
         setUser(data);
       } catch (error) {
         console.error("❌ Ошибка загрузки пользователя:", error);
@@ -31,17 +24,16 @@ const AdminHeader = () => {
     fetchUser();
   }, []);
 
-  // Определяем заголовок в зависимости от текущего маршрута
   const pageTitles = {
     "/dashboard": "Главная",
     "/admin/courses": "Курсы",
     "/admin/users": "Пользователи",
     "/admin/events": "Мероприятия",
+    "/admin/settings": "Настройки",
   };
 
   const pageTitle = pageTitles[location.pathname] || "Панель администратора";
 
-  // Формат имени: "Имя Ф."
   const getShortName = (fullName) => {
     if (!fullName) return "Загрузка...";
     const parts = fullName.split(" ");
@@ -58,11 +50,10 @@ const AdminHeader = () => {
           <input type="text" placeholder="Поиск" />
         </div>
         <FiBell className="notification-icon" />
-
         <div className="user-profile">
           <span className="user-name">{user ? getShortName(user.fullName) : "Загрузка..."}</span>
           <img
-            src={user?.photo ? `http://localhost:5001/${user.photo}` : "http://localhost:5001/uploads/default.jpg"}
+            src={user?.photo ? `http://localhost:5001/${user.photo}` : "http://localhost:5001/uploads/default.png"}
             alt="User"
             className="user-avatar"
           />

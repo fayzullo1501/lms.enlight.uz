@@ -1,0 +1,103 @@
+/* Панель действий */
+.materials-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Кнопки */
+.materials-add-btn {
+    background: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.materials-add-btn:hover {
+    background: #1d82f0;
+  }
+
+.materials-delete-btn {
+    background: #0e0e0e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.materials-delete-btn:hover {
+    background-color: #3b82f6;
+}
+
+/* Контейнер для таблицы */
+.materials-table-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: transparent;
+    border-bottom: none;
+    flex: 1;
+    padding-bottom: 10px;
+}
+
+/* Таблица */
+.materials-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Заголовки и ячейки */
+.materials-table th, .materials-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    vertical-align: middle;
+    color: white;
+}
+
+/* Заголовки */
+.materials-table th {
+    background-color: #333;
+    font-weight: bold;
+    border-bottom: 2px solid #444;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* Эффект наведения */
+.materials-table tbody tr:hover {
+    background-color: #292929;
+}
+
+/* Чекбоксы */
+.checkbox-column {
+    width: 40px;
+    text-align: center;
+}
+
+/* Текстовое сообщение при отсутствии материалов */
+.no-materials {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Ссылка для скачивания файла или перехода */
+.material-link {
+    color: #3b82f6;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.material-link:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,23 @@
+.course-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0e0e0e;
+    color: #fff;
+    overflow: hidden;
+  }
+  
+  .course-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .course-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  

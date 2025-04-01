@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { FiHome, FiBook, FiUsers, FiCalendar, FiLogOut } from "react-icons/fi";
+import { FiHome, FiBook, FiUsers, FiCalendar, FiLogOut, FiSettings } from "react-icons/fi";
 import "../styles/AdminSidebar.css";
 
 const AdminSidebar = () => {
@@ -29,6 +29,9 @@ const AdminSidebar = () => {
         </NavLink>
         <NavLink to="/admin/events" className="menu-item">
           <FiCalendar className="icon" /> Мероприятия
+        </NavLink>
+        <NavLink to="/admin/settings" className="menu-item">
+          <FiSettings className="icon" /> Настройки
         </NavLink>
       </nav>
       <div className="logout">
