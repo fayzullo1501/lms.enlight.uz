@@ -1,7 +1,7 @@
-import express from "express";
-import Chat from "../models/Chat.js";
-import Course from "../models/Course.js";
-import User from "../models/User.js";
+const express = require("express");
+const Chat = require("../models/Chat");
+const Course = require("../models/Course");
+const User = require("../models/User");
 
 const router = express.Router();
 
@@ -35,8 +35,8 @@ router.get("/:courseId/messages", async (req, res) => {
     const { courseId } = req.params;
 
     const messages = await Chat.find({ course: courseId })
-      .populate("sender", "fullName role")
-      .sort({ timestamp: 1 });
+      .populate("sender", "fullName role") // Добавляем информацию о пользователе
+      .sort({ timestamp: 1 }); // Сортируем по дате
 
     res.json(messages);
   } catch (error) {
@@ -61,4 +61,4 @@ router.delete("/:courseId/messages/:messageId", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
