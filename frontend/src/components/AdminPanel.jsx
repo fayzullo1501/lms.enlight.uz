@@ -16,8 +16,8 @@ const AdminPanel = ({ children }) => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const coursesRes = await axios.get("http://localhost:5001/api/courses");
-        const usersRes = await axios.get("http://localhost:5001/api/users");
+        const coursesRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses`);
+        const usersRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users`);
 
         const teachersCount = usersRes.data.filter((user) => user.role === "teacher").length;
         const studentsCount = usersRes.data.filter((user) => user.role === "student").length;

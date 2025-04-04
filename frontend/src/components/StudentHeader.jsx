@@ -17,11 +17,11 @@ const StudentHeader = () => {
       }
 
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/users/${userId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/${userId}`);
         setUser(data);
       } catch (error) {
         console.error("❌ Ошибка загрузки пользователя:", error);
-      }
+      }      
     };
 
     fetchUser();
@@ -56,7 +56,7 @@ const StudentHeader = () => {
         <div className="user-profile">
           <span className="user-name">{user ? getShortName(user.fullName) : "Загрузка..."}</span>
           <img
-            src={`http://localhost:5001/${user?.photo || "uploads/default.png"}`}
+            src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user?.photo || "uploads/default.png"}`}
             alt="User"
             className="user-avatar"
           />

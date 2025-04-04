@@ -16,7 +16,7 @@ const CourseDetails = () => {
   useEffect(() => {
     const fetchCourseStats = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}`);
         setCourseStats({
           students: data.students.length,
           lessons: data.lessons.length,

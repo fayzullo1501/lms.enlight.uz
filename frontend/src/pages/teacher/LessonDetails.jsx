@@ -17,7 +17,7 @@ const LessonDetails = () => {
 
   const fetchLesson = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}/lessons/${lessonId}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/lessons/${lessonId}`);
       setLesson(data);
     } catch (error) {
       console.error("❌ Ошибка загрузки деталей урока:", error);
@@ -44,7 +44,7 @@ const LessonDetails = () => {
               {lesson.banner ? (
                 <div className="lesson-banner-container">
                   <h2 className="lesson-title-overlay">{lesson.title}</h2>
-                  <img src={`http://localhost:5001/${lesson.banner}`} alt="Lesson Banner" className="teacher-lesson-banner" />
+                  <img src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${lesson.banner}`} alt="Lesson Banner" className="teacher-lesson-banner" />
                 </div>
               ) : (
                 <div className="lesson-placeholder">
@@ -65,9 +65,9 @@ const LessonDetails = () => {
                 )}
 
                 {lesson.materials.length > 0 && (
-                  <a href={`http://localhost:5001/${lesson.materials[0].fileUrl}`} target="_blank" rel="noopener noreferrer">
-                    <FiDownload className="lesson-icon" title="Открыть материал в новой вкладке" />
-                  </a>
+                  <a href={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${lesson.materials[0].fileUrl}`} target="_blank" rel="noopener noreferrer">
+                  <FiDownload className="lesson-icon" title="Открыть материал в новой вкладке" />
+                </a>                
                 )}
 
                 <FiHeart className={`lesson-icon ${liked ? "liked" : ""}`} title="Отметить" onClick={handleLike} />

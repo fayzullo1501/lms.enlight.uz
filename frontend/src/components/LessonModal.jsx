@@ -41,10 +41,10 @@ const LessonModal = ({ courseId, onClose, onLessonAdded }) => {
   
     try {
       const response = await axios.post(
-        `http://localhost:5001/api/courses/${courseId}/lessons`,
+        `${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/lessons`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      );      
   
       console.log("✅ Урок успешно добавлен:", response.data);
       onLessonAdded();

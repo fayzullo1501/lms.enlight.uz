@@ -14,7 +14,7 @@ const AdminHeader = () => {
       if (!userId) return;
 
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/users/${userId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/${userId}`);
         setUser(data);
       } catch (error) {
         console.error("❌ Ошибка загрузки пользователя:", error);
@@ -53,7 +53,9 @@ const AdminHeader = () => {
         <div className="user-profile">
           <span className="user-name">{user ? getShortName(user.fullName) : "Загрузка..."}</span>
           <img
-            src={user?.photo ? `http://localhost:5001/${user.photo}` : "http://localhost:5001/uploads/default.png"}
+            src={user?.photo
+              ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
+              : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.png`}
             alt="User"
             className="user-avatar"
           />

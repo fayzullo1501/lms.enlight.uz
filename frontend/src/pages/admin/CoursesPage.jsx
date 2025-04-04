@@ -16,12 +16,12 @@ const CoursesPage = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/courses");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses`);
       setCourses(data);
     } catch (error) {
       console.error("Ошибка загрузки курсов:", error);
     }
-  };
+  };  
 
   const toggleSelectAll = () => {
     setSelectedCourses(
@@ -47,13 +47,13 @@ const CoursesPage = () => {
 
     try {
       for (const courseId of selectedCourses) {
-        await axios.delete(`http://localhost:5001/api/courses/${courseId}`);
+        await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}`);
       }
       fetchCourses();
       setSelectedCourses([]);
     } catch (error) {
       alert("Ошибка при удалении курсов!");
-    }
+    }    
   };
 
   const handleEditCourse = () => {
@@ -110,11 +110,11 @@ const CoursesPage = () => {
                   </td>
                   <td>{index + 1}</td>
                   <td>
-                    <img
-                      src={`http://localhost:5001/${course.banner}`}
-                      alt="Course Banner"
-                      className="courses-banner"
-                    />
+                  <img
+                    src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${course.banner}`}
+                    alt="Course Banner"
+                    className="courses-banner"
+                  />
                   </td>
                   <td>{course.title}</td>
                   <td>{course.description}</td>

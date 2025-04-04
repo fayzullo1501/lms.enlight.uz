@@ -17,7 +17,7 @@ const LessonsPage = () => {
 
   const fetchLessons = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}/lessons`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/lessons`);
       setLessons(data.lessons || []);
     } catch (error) {
       console.error("❌ Ошибка загрузки уроков:", error);
@@ -28,7 +28,7 @@ const LessonsPage = () => {
   const deleteLesson = async (lessonId) => {
     if (!window.confirm("Удалить урок?")) return;
     try {
-      await axios.delete(`http://localhost:5001/api/courses/${courseId}/lessons/${lessonId}`);
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/lessons/${lessonId}`);
       fetchLessons();
     } catch (error) {
       console.error("❌ Ошибка при удалении урока:", error);
@@ -54,10 +54,10 @@ const LessonsPage = () => {
               >
                 {lesson.banner && (
                   <img
-                    src={`http://localhost:5001/${lesson.banner}`}
-                    alt="Lesson"
-                    className="lesson-banner"
-                  />
+                  src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${lesson.banner}`}
+                  alt="Lesson"
+                  className="lesson-banner"
+                />                
                 )}
                 <div className="lesson-info">
                   <h3>{lesson.title}</h3>

@@ -43,9 +43,9 @@ const MaterialsModal = ({ courseId, onClose, onMaterialAdded }) => {
     }
   
     try {
-      await axios.post(`http://localhost:5001/api/courses/${courseId}/materials`, formData, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/materials`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
-      });
+      });      
       onMaterialAdded();
       onClose();
     } catch (error) {

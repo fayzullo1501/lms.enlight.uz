@@ -11,7 +11,7 @@ const CourseHeader = ({ courseId }) => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}`);
         setCourse(data);
       } catch (error) {
         console.error("Ошибка загрузки курса:", error);

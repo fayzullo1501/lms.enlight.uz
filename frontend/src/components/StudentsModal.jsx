@@ -14,7 +14,7 @@ const StudentsModal = ({ courseId, onClose, onStudentsAdded }) => {
 
   const fetchStudents = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/users?role=student");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users?role=student`);
       const students = data.filter(user => user.role === "student"); // ✅ Оставляем только студентов
       setAllStudents(students);
       setFilteredStudents(students); // ✅ Инициализация отфильтрованного списка
@@ -37,7 +37,7 @@ const StudentsModal = ({ courseId, onClose, onStudentsAdded }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`http://localhost:5001/api/courses/${courseId}/students`, { studentIds: selectedStudents });
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/students`, { studentIds: selectedStudents });
       onStudentsAdded();
       onClose();
     } catch (error) {

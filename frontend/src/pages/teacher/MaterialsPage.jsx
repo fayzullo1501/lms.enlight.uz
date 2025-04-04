@@ -17,7 +17,7 @@ const MaterialsPage = () => {
 
   const fetchMaterials = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}/materials`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/materials`);
       setMaterials(data);
     } catch (error) {
       console.error("❌ Ошибка загрузки материалов:", error);
@@ -47,16 +47,16 @@ const MaterialsPage = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5001/api/courses/${courseId}/materials`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/materials`, {
         data: { materialIds: selectedMaterials }
       });
-
+    
       alert("✅ Материалы успешно удалены!");
       fetchMaterials();
       setSelectedMaterials([]);
     } catch (error) {
       alert("❌ Ошибка при удалении материалов!");
-    }
+    }    
   };
 
   return (
@@ -107,9 +107,9 @@ const MaterialsPage = () => {
                         Открыть ссылку
                         </a>
                     ) : (
-                        <a href={`http://localhost:5001/${material.fileUrl}`} download className="material-link">
-                        Скачать файл
-                        </a>
+                      <a href={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${material.fileUrl}`} download className="material-link">
+                      Скачать файл
+                    </a>                    
                     )}
                     </td>
                     <td>{new Date(material.createdAt).toLocaleDateString()}</td> {/* ✅ Дата исправлена */}

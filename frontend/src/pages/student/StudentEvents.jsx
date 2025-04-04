@@ -13,12 +13,12 @@ const MyCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/student/courses");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/student/courses`);
       setCourses(data);
     } catch (error) {
       console.error("❌ Ошибка загрузки курсов:", error);
     }
-  };
+  };  
 
   return (
     <StudentPanel>
@@ -28,7 +28,11 @@ const MyCourses = () => {
           {courses.length > 0 ? (
             courses.map((course) => (
               <Link to={`/student/course/${course._id}`} key={course._id} className="course-card">
-                <img src={`http://localhost:5001/${course.banner}`} alt={course.title} className="course-banner" />
+                <img
+                  src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${course.banner}`}
+                  alt={course.title}
+                  className="course-banner"
+                />
                 <div className="course-info">
                   <h3>{course.title}</h3>
                   <p>{course.description}</p>

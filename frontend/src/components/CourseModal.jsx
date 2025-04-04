@@ -32,12 +32,12 @@ const CourseModal = ({ onClose, onCourseAdded, editingCourse }) => {
 
   const fetchMentors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/users");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users`);
       setMentors(data.filter(user => user.role === "teacher"));
     } catch (error) {
       console.error("Ошибка загрузки менторов:", error);
     }
-  };
+  };  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,14 +71,14 @@ const CourseModal = ({ onClose, onCourseAdded, editingCourse }) => {
       }
 
       if (editingCourse) {
-        await axios.put(`http://localhost:5001/api/courses/${editingCourse._id}`, courseData, {
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/courses/${editingCourse._id}`, courseData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
-        await axios.post("http://localhost:5001/api/courses", courseData, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/courses`, courseData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-      }
+      }      
 
       alert(editingCourse ? "Курс обновлен!" : "Курс добавлен!");
       onCourseAdded();

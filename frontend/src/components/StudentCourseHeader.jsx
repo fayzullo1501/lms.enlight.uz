@@ -31,11 +31,11 @@ const StudentCourseHeader = ({ courseId }) => {
       if (!userId) return;
 
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/users/profile/${userId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/profile/${userId}`);
         setUser(data);
       } catch (error) {
         console.error("❌ Ошибка загрузки пользователя:", error);
-      }
+      }      
     };
 
     fetchUser();
@@ -56,7 +56,9 @@ const StudentCourseHeader = ({ courseId }) => {
           <div className="user-profile">
             <span className="user-name">{user.fullName || "Пользователь"}</span>
             <img
-              src={user.photo ? `http://localhost:5001/${user.photo}` : "/default-avatar.png"}
+              src={user.photo
+                ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
+                : '/default-avatar.png'}
               alt="User Avatar"
               className="user-avatar"
             />

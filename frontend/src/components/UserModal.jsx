@@ -68,14 +68,14 @@ const UserModal = ({ onClose, onUserAdded, editingUser }) => {
       }
 
       if (editingUser) {
-        await axios.put(`http://localhost:5001/api/users/${editingUser._id}`, userData, {
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/users/${editingUser._id}`, userData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
-        await axios.post("http://localhost:5001/api/users", userData, {
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/users`, userData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-      }
+      }      
 
       alert(`✅ Пользователь ${editingUser ? "обновлён" : "добавлен"} успешно!`);
       onUserAdded();

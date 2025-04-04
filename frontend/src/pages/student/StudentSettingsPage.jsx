@@ -13,7 +13,7 @@ const MyCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/student/courses");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/student/courses`);
       setCourses(data);
     } catch (error) {
       console.error("❌ Ошибка загрузки курсов:", error);

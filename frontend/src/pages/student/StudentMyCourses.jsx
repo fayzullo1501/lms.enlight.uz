@@ -18,15 +18,15 @@ const StudentMyCourses = () => {
       }
 
       try {
-        const { data } = await axios.get(`http://localhost:5001/api/courses/student/${studentId}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/student/${studentId}`);
         const formattedCourses = data.map((course) => ({
           ...course,
-          bannerUrl: `http://localhost:5001/${course.banner}`,
+          bannerUrl: `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${course.banner}`,
         }));
         setCourses(formattedCourses);
       } catch (error) {
         console.error("❌ Ошибка загрузки курсов студента:", error);
-      }
+      }      
     };
 
     fetchCourses();

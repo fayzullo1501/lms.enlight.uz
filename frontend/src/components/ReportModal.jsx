@@ -15,10 +15,10 @@ const ReportModal = ({ onClose }) => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5001/api/reports/${section}`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/reports/${section}`, {
         params: { startDate, endDate, format },
         responseType: format === "excel" ? "blob" : "json"
-      });
+      });      
 
       if (format === "excel") {
         const url = window.URL.createObjectURL(new Blob([response.data]));

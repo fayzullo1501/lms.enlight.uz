@@ -18,12 +18,12 @@ const UsersPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5001/api/users");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users`);
       setUsers(data);
     } catch (error) {
       console.error("Ошибка загрузки пользователей:", error);
     }
-  };  
+  };   
 
   const togglePasswordVisibility = (userId) => {
     setVisiblePasswords((prev) => ({
@@ -54,13 +54,13 @@ const UsersPage = () => {
     }
 
     try {
-      await axios.delete("http://localhost:5001/api/users", { data: { userIds: selectedUsers } });
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/users`, { data: { userIds: selectedUsers } });
       alert("Пользователи успешно удалены!");
       fetchUsers();
       setSelectedUsers([]);
     } catch (error) {
       alert("Ошибка при удалении пользователей!");
-    }
+    }    
   };
 
   // 🔥 Изменение пользователя
@@ -119,11 +119,13 @@ const UsersPage = () => {
                   </td>
                   <td>{index + 1}</td>
                   <td>
-                    <img
-                      src={user.photo ? `http://localhost:5001/${user.photo}` : "http://localhost:5001/uploads/default.png"}
-                      alt="User"
-                      className="users-avatar"
-                    />
+                  <img
+                    src={user.photo
+                      ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
+                      : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.png`}
+                    alt="User"
+                    className="users-avatar"
+                  />
                   </td>
                   <td>{user.fullName || "—"}</td>
                   <td>{user.role || "—"}</td>

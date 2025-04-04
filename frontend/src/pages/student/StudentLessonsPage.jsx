@@ -15,7 +15,7 @@ const StudentLessonsPage = () => {
 
   const fetchLessons = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}/lessons`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/lessons`);
       setLessons(data.lessons || []);
     } catch (error) {
       console.error("❌ Ошибка загрузки уроков:", error);
@@ -39,11 +39,7 @@ const StudentLessonsPage = () => {
                 onClick={() => navigate(`/student/course/${courseId}/lessons/${lesson._id}`)}
               >
                 {lesson.banner && (
-                  <img
-                    src={`http://localhost:5001/${lesson.banner}`}
-                    alt="Lesson"
-                    className="lesson-banner"
-                  />
+                  <img src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${lesson.banner}`} alt="Lesson" className="lesson-banner" />
                 )}
                 <div className="lesson-info">
                   <h3>{lesson.title}</h3>

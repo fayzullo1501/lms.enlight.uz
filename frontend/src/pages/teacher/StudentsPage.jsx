@@ -17,7 +17,7 @@ const StudentsPage = () => {
 
   const fetchStudents = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5001/api/courses/${courseId}/students`); // ✅ Запрос только для студентов этого курса
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/students`); // ✅ Запрос только для студентов этого курса
       setStudents(data);
     } catch (error) {
       console.error("❌ Ошибка загрузки студентов:", error);
@@ -45,16 +45,16 @@ const StudentsPage = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5001/api/courses/${courseId}/students`, { 
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/students`, { 
         data: { studentIds: selectedStudents } 
       });
-
+    
       alert("✅ Студенты успешно удалены из курса!");
       fetchStudents();
       setSelectedStudents([]);
     } catch (error) {
       alert("❌ Ошибка при удалении студентов!");
-    }
+    }    
   };
 
   return (
@@ -99,11 +99,13 @@ const StudentsPage = () => {
                     </td>
                     <td>{index + 1}</td>
                     <td>
-                      <img
-                        src={student.photo ? `http://localhost:5001/${student.photo}` : "http://localhost:5001/uploads/default.jpg"}
-                        alt="Student"
-                        className="students-avatar"
-                      />
+                    <img
+                      src={student.photo
+                        ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${student.photo}`
+                        : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.jpg`}
+                      alt="Student"
+                      className="students-avatar"
+                    />
                     </td>
                     <td>{student.fullName || "—"}</td>
                     <td>{student.phone || "—"}</td>
