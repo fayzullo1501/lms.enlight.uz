@@ -9,11 +9,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  build: {
-    outDir: 'dist',      // ✅ важно для Vercel
-  },
   server: {
-    port: 3000,
-    open: true,
+    port: 3000
   }
 })
