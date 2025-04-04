@@ -11,7 +11,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/auth/login", { login, password });
+      const { data } = await axios.post("/auth/login", { login, password });
 
       console.log("✅ Ответ сервера при логине:", data);
 
