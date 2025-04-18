@@ -45,10 +45,6 @@ const AdminHeader = () => {
       <h2 className="page-title">{pageTitle}</h2>
 
       <div className="header-right">
-        <div className="search-box">
-          <FiSearch className="search-icon" />
-          <input type="text" placeholder="Поиск" />
-        </div>
         <FiBell className="notification-icon" />
         <div className="user-profile">
           <span className="user-name">{user ? getShortName(user.fullName) : "Загрузка..."}</span>

@@ -14,9 +14,7 @@ const UserSchema = new mongoose.Schema(
       series: { type: String, default: "" },
       number: { type: String, default: "" }
     }
-  },
-  { timestamps: true } // ✅ Автоматическое создание `createdAt` и `updatedAt`
-);
+  }, { timestamps: true });
 
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
 module.exports = User;

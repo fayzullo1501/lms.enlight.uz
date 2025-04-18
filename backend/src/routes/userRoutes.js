@@ -43,12 +43,15 @@ router.post("/", upload.single("photo"), async (req, res) => {
   try {
     const { fullName, role, phone, login, password, email, passport } = req.body;
 
+    // 📌 Проверка обязательных полей
     if (!fullName || !role || !login || !password) {
       return res.status(400).json({ message: "❌ Обязательные поля: ФИО, роль, логин, пароль!" });
     }
 
+    // 📌 Хэширование пароля
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // 📌 Формируем объект пользователя
     const newUser = new User({
       fullName,
       role,
@@ -57,17 +60,23 @@ router.post("/", upload.single("photo"), async (req, res) => {
       password: hashedPassword,
       email,
       passport: passport ? JSON.parse(passport) : { series: "", number: "" },
-      photo: req.file ? `uploads/${req.file.filename}` : "uploads/default.png", // ✅ Добавляем фото
+      photo: req.file ? `uploads/${req.file.filename}` : "uploads/default.png",
+      // ❌ НЕ добавляем createdAt вручную — timestamps сделает это сам
     });
 
+    // 📌 Сохраняем пользователя
     await newUser.save();
+
+    // 📌 Загружаем пользователя без пароля
     const savedUser = await User.findById(newUser._id).select("-password");
 
+    // 📌 Отправляем результат
     res.status(201).json({
       message: "✅ Пользователь успешно добавлен!",
-      user: savedUser
+      user: savedUser,
     });
   } catch (error) {
+    console.error("❌ Ошибка при добавлении пользователя:", error);
     res.status(500).json({ message: "❌ Ошибка при добавлении пользователя!", error });
   }
 });

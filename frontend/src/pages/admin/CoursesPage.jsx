@@ -3,12 +3,15 @@ import axios from "axios";
 import AdminPanel from "../../components/AdminPanel";
 import "../../styles/CoursesPage.css";
 import CourseModal from "../../components/CourseModal";
+import { FiSearch, FiFilter } from "react-icons/fi";
+
 
 const CoursesPage = () => {
   const [courses, setCourses] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchCourses();
@@ -21,7 +24,7 @@ const CoursesPage = () => {
     } catch (error) {
       console.error("Ошибка загрузки курсов:", error);
     }
-  };  
+  };
 
   const toggleSelectAll = () => {
     setSelectedCourses(
@@ -53,7 +56,7 @@ const CoursesPage = () => {
       setSelectedCourses([]);
     } catch (error) {
       alert("Ошибка при удалении курсов!");
-    }    
+    }
   };
 
   const handleEditCourse = () => {
@@ -67,14 +70,36 @@ const CoursesPage = () => {
     setIsModalOpen(true);
   };
 
+  const filteredCourses = courses.filter((course) =>
+    course.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <AdminPanel>
       <div className="courses-content">
+      <div className="courses-top-bar">
         <div className="courses-actions">
           <button className="courses-add-btn" onClick={() => { setEditingCourse(null); setIsModalOpen(true); }}>Добавить</button>
           <button className="courses-edit-btn" onClick={handleEditCourse}>Изменить</button>
           <button className="courses-delete-btn" onClick={handleDeleteCourses}>Удалить</button>
         </div>
+
+        <div className="courses-toolbar">
+          <div className="courses-search-box">
+            <FiSearch className="courses-search-icon" />
+            <input
+              type="text"
+              placeholder="Поиск ..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <button className="courses-filter-btn" onClick={() => alert("Открыть фильтр")}>
+            <FiFilter className="courses-filter-icon" />
+            <span>Фильтр</span>
+          </button>
+        </div>
+      </div>
 
         <div className="courses-table-container">
           <table className="courses-table">
@@ -99,7 +124,7 @@ const CoursesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {courses.map((course, index) => (
+              {filteredCourses.map((course, index) => (
                 <tr key={course._id}>
                   <td>
                     <input
@@ -110,11 +135,11 @@ const CoursesPage = () => {
                   </td>
                   <td>{index + 1}</td>
                   <td>
-                  <img
-                    src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${course.banner}`}
-                    alt="Course Banner"
-                    className="courses-banner"
-                  />
+                    <img
+                      src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${course.banner}`}
+                      alt="Course Banner"
+                      className="courses-banner"
+                    />
                   </td>
                   <td>{course.title}</td>
                   <td>{course.description}</td>

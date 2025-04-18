@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { FiSearch, FiBell } from "react-icons/fi";
+import { FiBell } from "react-icons/fi";
 import axios from "axios";
 import "../styles/TeacherHeader.css";
 
@@ -44,19 +44,15 @@ const TeacherHeader = () => {
       <h2 className="page-title">{pageTitle}</h2>
 
       <div className="header-right">
-        <div className="search-box">
-          <FiSearch className="search-icon" />
-          <input type="text" placeholder="Поиск" />
-        </div>
-
         <FiBell className="notification-icon" />
-
         <div className="user-profile">
           <span className="user-name">{user ? getShortName(user.fullName) : "Загрузка..."}</span>
           <img
-            src={user?.photo
-              ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
-              : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.png`}
+            src={
+              user?.photo
+                ? `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}/${user.photo}`
+                : `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}/uploads/default.png`
+            }
             alt="User"
             className="user-avatar"
           />

@@ -137,7 +137,10 @@ router.get("/mentor/:mentorId", async (req, res) => {
     const mentorId = req.params.mentorId;
 
     // Проверяем, есть ли такой пользователь и является ли он teacher
-    const courses = await Course.find({ mentor: mentorId }).populate("mentor", "fullName");
+    const courses = await Course.find({ mentor: mentorId })
+  .populate("mentor", "fullName")
+  .populate("students", "fullName"); // <== вот это важно
+
     
     if (!courses.length) {
       return res.status(404).json({ message: "❌ У этого ментора нет курсов!" });

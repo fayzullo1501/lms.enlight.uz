@@ -3,14 +3,15 @@ import axios from "axios";
 import AdminPanel from "../../components/AdminPanel";
 import "../../styles/UsersPage.css";
 import UserModal from "../../components/UserModal";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FiSearch, FiFilter } from "react-icons/fi";
+
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [visiblePasswords, setVisiblePasswords] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchUsers();
@@ -23,13 +24,6 @@ const UsersPage = () => {
     } catch (error) {
       console.error("Ошибка загрузки пользователей:", error);
     }
-  };   
-
-  const togglePasswordVisibility = (userId) => {
-    setVisiblePasswords((prev) => ({
-      ...prev,
-      [userId]: !prev[userId],
-    }));
   };
 
   const toggleSelectAll = () => {
@@ -42,7 +36,6 @@ const UsersPage = () => {
     );
   };
 
-  // 🔥 Удаление пользователей
   const handleDeleteUsers = async () => {
     if (selectedUsers.length === 0) {
       alert("Выберите пользователя!");
@@ -54,16 +47,17 @@ const UsersPage = () => {
     }
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/users`, { data: { userIds: selectedUsers } });
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+        data: { userIds: selectedUsers },
+      });
       alert("Пользователи успешно удалены!");
       fetchUsers();
       setSelectedUsers([]);
     } catch (error) {
       alert("Ошибка при удалении пользователей!");
-    }    
+    }
   };
 
-  // 🔥 Изменение пользователя
   const handleEditUser = () => {
     if (selectedUsers.length !== 1) {
       alert("Выберите одного пользователя для редактирования!");
@@ -75,14 +69,41 @@ const UsersPage = () => {
     setIsModalOpen(true);
   };
 
+  const filteredUsers = users.filter((user) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      user.fullName?.toLowerCase().includes(query) ||
+      user.phone?.toLowerCase().includes(query) ||
+      `${user.passport?.series} ${user.passport?.number}`.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <AdminPanel>
       <div className="users-content">
+      <div className="users-top-bar">
         <div className="users-actions">
           <button className="users-add-btn" onClick={() => { setEditingUser(null); setIsModalOpen(true); }}>Добавить</button>
           <button className="users-edit-btn" onClick={handleEditUser}>Изменить</button>
           <button className="users-delete-btn" onClick={handleDeleteUsers}>Удалить</button>
         </div>
+
+        <div className="users-toolbar">
+          <div className="search-box">
+            <FiSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Поиск ..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <button className="filter-btn" onClick={() => alert("Открыть фильтр")}>
+            <FiFilter className="filter-icon" />
+            <span>Фильтр</span>
+          </button>
+        </div>
+      </div>
 
         <div className="users-table-container">
           <table className="users-table">
@@ -101,14 +122,13 @@ const UsersPage = () => {
                 <th>Роль</th>
                 <th>Телефон</th>
                 <th>Логин</th>
-                <th>Пароль</th>
                 <th>Email</th>
                 <th>Паспорт</th>
                 <th>Дата регистрации</th>
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {filteredUsers.map((user, index) => (
                 <tr key={user._id}>
                   <td>
                     <input
@@ -119,27 +139,27 @@ const UsersPage = () => {
                   </td>
                   <td>{index + 1}</td>
                   <td>
-                  <img
-                    src={user.photo
-                      ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
-                      : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.png`}
-                    alt="User"
-                    className="users-avatar"
-                  />
+                    <img
+                      src={user.photo
+                        ? `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/${user.photo}`
+                        : `${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}/uploads/default.png`}
+                      alt="User"
+                      className="users-avatar"
+                    />
                   </td>
                   <td>{user.fullName || "—"}</td>
                   <td>{user.role || "—"}</td>
                   <td>{user.phone || "—"}</td>
                   <td>{user.login}</td>
-                  <td className="password-column">
-                    <span>{visiblePasswords[user._id] ? user.password : "••••••••"}</span>
-                    <button className="eye-btn" onClick={() => togglePasswordVisibility(user._id)}>
-                      {visiblePasswords[user._id] ? <FaEyeSlash /> : <FaEye />}
-                    </button>
-                  </td>
                   <td>{user.email || "—"}</td>
                   <td>{user.passport?.series || "—"} {user.passport?.number || "—"}</td>
-                  <td>{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : "—"}</td>
+                  <td>{user.createdAt ? new Date(user.createdAt).toLocaleDateString("ru-RU", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  }) : "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -147,7 +167,6 @@ const UsersPage = () => {
         </div>
       </div>
 
-      {/* Модальное окно */}
       {isModalOpen && <UserModal onClose={() => setIsModalOpen(false)} onUserAdded={fetchUsers} editingUser={editingUser} />}
     </AdminPanel>
   );
